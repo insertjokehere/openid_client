@@ -396,12 +396,16 @@ class Flow {
   Flow.authorizationCodeWithPKCE(
     Client client, {
     String? state,
+    String? prompt,
     List<String> scopes = const ['openid', 'profile', 'email'],
   }) : this._(
           FlowType.proofKeyForCodeExchange,
           'code',
           client,
           state: state,
+          additionalParameters: {
+            if (prompt != null) 'prompt': prompt,
+          },
           scopes: scopes,
         );
 
